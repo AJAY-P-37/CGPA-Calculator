@@ -43,15 +43,31 @@ const displaySemesterCount = () => {
         gpa.max = "10"
         gpa.step = "0.01"
 
+        const x = document.createElement("b")
+        x.innerHTML = "x"
+
         const credits = document.createElement("input");
         credits.type = "number";
         credits.placeholder = `Credits in Sem ${sem}`
         credits.min = "0"
 
+
         tr.appendChild(label)
         tr.appendChild(gpa)
+        tr.appendChild(x)
         tr.appendChild(credits)
+
         table.appendChild(tr);
+
+        if (sem != semestersCompleted) {
+            const tr = document.createElement("tr");
+
+            const plus = document.createElement("b")
+            plus.innerHTML = "+"
+            tr.appendChild(plus)
+
+            table.appendChild(tr)
+        }
     }
 
 
@@ -81,6 +97,9 @@ const displaySubjectsCount = () => {
         grade.minLength = "1"
         grade.maxLength = "1"
 
+        const x = document.createElement("b")
+        x.innerHTML = "x"
+
         const credits = document.createElement("input");
         credits.type = "number";
         credits.placeholder = `Credits for Subject ${count}`
@@ -88,8 +107,19 @@ const displaySubjectsCount = () => {
 
         tr.appendChild(label)
         tr.appendChild(grade)
+        tr.appendChild(x)
         tr.appendChild(credits)
         table.appendChild(tr);
+
+        if (count != subjectsCount) {
+            const tr = document.createElement("tr");
+
+            const plus = document.createElement("b")
+            plus.innerHTML = "+"
+            tr.appendChild(plus)
+
+            table.appendChild(tr)
+        }
     }
 }
 
