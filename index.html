@@ -5,46 +5,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="/style.css">
+
     <title>Document</title>
 </head>
 
 <body>
-    <div>
-        What do you want to Calculate?
-        <button>CGPA</button>
-        <button>GPA</button>
+    <div class="box" id="outerbox">
+        <div class="columns is-mobile is-vcentered is-centered block">
+            <div class="columns is-mobile is-vcentered is-centered block" id="radio">
+                <b class="column is-8">What do you want to Calculate?</b>
+
+                <div class="column tabs is-small is-toggle is-toggle-rounded">
+                    <ul>
+                        <li><a>CGPA</a></li>
+                        <li><a>GPA</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class='cgpa block'>
+            <div class="columns is-vcentered is-centered block">
+                <b class="column is-2">Upto which Semester</b>
+                <div class="select is-small is-info is-rounded">
+                    <select name="semestersCompleted">
+                        <option value="0" style="display: none">?</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+            </div>
+            <div class="columns is-vcentered is-centered block" id="padd">
+                <table>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="gpa block">
+            <div class="columns is-mobile is-vcentered is-centered block">
+                <b class="column is-5">Total number of Passed subjects in the semester</b>
+                <input class="column is-2 is-small input is-rounded is-normal is-info" type="number"
+                    placeholder="No. of Subjects Passed" min="0" max="75" step="1">
+            </div>
+
+            <div class="columns is-vcentered is-centered block" id="padd">
+                <table>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script src="app.js"></script>
     </div>
-
-    <div class='cgpa'>
-        Upto which Semester?
-        <select name="semestersCompleted" id="">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-        </select>
-        <table class="form">
-            <tbody>
-
-            </tbody>
-        </table>
-    </div>
-
-    <div class="gpa">
-        <label>Total number of Passed subjects in this semester</label>
-        <input type="number" placeholder="No. of Subjects Passed" min="0" max="75" step="1">
-
-        <table>
-            <tbody>
-
-            </tbody>
-        </table>
-    </div>
-    <script src="app.js"></script>
 </body>
 
 </html>

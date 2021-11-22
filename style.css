@@ -1,0 +1,22 @@
+.block:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+body{
+    text-align: center;
+    margin: 0px;
+}
+
+#radio{
+    width: 600px;
+}
+
+#padd {
+    margin-top: 10px;
+  }
+
+@media (max-width:300px) {
+
+
+    
+}
