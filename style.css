@@ -2,21 +2,38 @@
     margin-bottom: 1.5rem;
   }
 
-body{
+html{
+    min-height:100vh;
+}
+  body{
     text-align: center;
     margin: 0px;
+    min-height: 100vh;
+    background-color:black;
 }
 
+#outerbox{
+    margin-top: 100px;
+    max-width: fit-content;
+    
+}
+
+#tabs li:active{
+    color: rgb(0, 0, 0);
+}
 #radio{
     width: 600px;
 }
 
-#padd {
+#cgpaTable {
     margin-top: 10px;
   }
 
-@media (max-width:300px) {
+  @media (min-width: 768px) {
 
-
-    
-}
+    body{
+        display: flex;
+        justify-content: center;
+    }
+      
+  }

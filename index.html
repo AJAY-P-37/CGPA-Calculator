@@ -18,7 +18,7 @@
                 <b class="column is-8">What do you want to Calculate?</b>
 
                 <div class="column tabs is-small is-toggle is-toggle-rounded">
-                    <ul>
+                    <ul id="tabs">
                         <li><a>CGPA</a></li>
                         <li><a>GPA</a></li>
                     </ul>
@@ -28,7 +28,7 @@
 
         <div class='cgpa block'>
             <div class="columns is-vcentered is-centered block">
-                <b class="column is-2">Upto which Semester</b>
+                <b class="column is-5">Upto which Semester</b>
                 <div class="select is-small is-info is-rounded">
                     <select name="semestersCompleted">
                         <option value="0" style="display: none">?</option>
@@ -43,7 +43,7 @@
                     </select>
                 </div>
             </div>
-            <div class="columns is-vcentered is-centered block" id="padd">
+            <div class="columns is-vcentered is-centered block" id="cgpaTable">
                 <table>
                     <tbody>
 
@@ -54,8 +54,8 @@
 
         <div class="gpa block">
             <div class="columns is-mobile is-vcentered is-centered block">
-                <b class="column is-5">Total number of Passed subjects in the semester</b>
-                <input class="column is-2 is-small input is-rounded is-normal is-info" type="number"
+                <b class="column is-6">Total number of Passed subjects in the semester</b>
+                <input class="column is-4 is-small input is-rounded is-normal is-info" type="number"
                     placeholder="No. of Subjects Passed" min="0" max="75" step="1">
             </div>
 

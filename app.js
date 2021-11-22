@@ -7,14 +7,18 @@ window.onload = () => {
 const displayCGPA = () => {
     cgpaDiv.style.display = "block"
     cgpaButton.parentNode.classList.add("is-active")
+    cgpaButton.style.backgroundColor = "black"
     gpaButton.parentNode.classList.remove("is-active")
+    gpaButton.style.backgroundColor = "white"
     gpaDiv.style.display = "none"
 }
 
 const displayGPA = () => {
     cgpaDiv.style.display = "none"
     gpaButton.parentNode.classList.add("is-active")
+    gpaButton.style.backgroundColor = "black"
     cgpaButton.parentNode.classList.remove("is-active")
+    cgpaButton.style.backgroundColor = "white"
     gpaDiv.style.display = "block";
 }
 
@@ -101,7 +105,7 @@ const displaySemesterCount = () => {
 
     let cgpaDisplay = cgpaDiv.childNodes[cgpaDiv.childNodes.length - 1]
     console.log(cgpaDisplay.nodeName)
-    if (cgpaDisplay.nodeName == 'P') {
+    if (cgpaDisplay.nodeName == 'DIV') {
         cgpaDisplay.remove()
     }
 
@@ -120,7 +124,7 @@ const displaySemesterCount = () => {
 
         const gpa = document.createElement("input");
         gpa.type = "number";
-        gpa.placeholder = `GPA in Sem ${sem}`
+        gpa.placeholder = `Sem ${sem} GPA`
         gpa.min = "0"
         gpa.max = "10"
         gpa.step = "0.01"
@@ -137,7 +141,7 @@ const displaySemesterCount = () => {
 
         const credits = document.createElement("input");
         credits.type = "number";
-        credits.placeholder = `Credits in Sem ${sem}`
+        credits.placeholder = `Sem ${sem} Credits`
         credits.min = "0"
         credits.step = "1"
         credits.classList.add("input")
@@ -310,18 +314,19 @@ function validateSubjectCredits(credits, count) {
 
 const displaySubjectsCount = () => {
 
+    const table = document.querySelectorAll("tbody")[1];
+    table.replaceChildren()
+
+    let gpaDisplay = gpaDiv.childNodes[gpaDiv.childNodes.length - 1]
+    console.log(gpaDisplay.nodeName)
+    if (gpaDisplay.nodeName == 'DIV') {
+        gpaDisplay.remove()
+    }
     if (noOfSubjects.value == "") {
-        const table = document.querySelectorAll("tbody")[1];
-        table.replaceChildren()
         return
     }
 
     let subjectsCount = parseInt(noOfSubjects.value)
-
-
-    const table = document.querySelectorAll("tbody")[1];
-    table.replaceChildren()
-
 
     gradeValidator.length = subjectsCount
     gradeValidator.fill(false, 0, subjectsCount)
@@ -359,7 +364,7 @@ const displaySubjectsCount = () => {
         // grade.ariaLabel = "Default select example"
 
         const optionSelect = document.createElement("option")
-        optionSelect.innerHTML = `Grade in Subject ${count}`
+        optionSelect.innerHTML = `Subject ${count} Grade`
         optionSelect.style.display = "none"
 
         const optionS = document.createElement("option");
@@ -398,7 +403,7 @@ const displaySubjectsCount = () => {
 
         const credits = document.createElement("input");
         credits.type = "number";
-        credits.placeholder = `Credits for Subject ${count}`
+        credits.placeholder = `Subject ${count} Credits`
         credits.min = "0"
         credits.classList.add("input")
         credits.classList.add("is-rounded")
