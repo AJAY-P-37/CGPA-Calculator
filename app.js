@@ -217,7 +217,7 @@ const calculateCGPA = () => {
     result.classList.add("is-vcentered")
     result.classList.add("is-centered")
     result.classList.add("is-mobile")
-    result.style.marginTop = "10px"
+    result.style.marginTop = "20px"
 
 
     const resultTag = document.createElement("div")
@@ -420,6 +420,10 @@ const displaySubjectsCount = () => {
 
         if (count != subjectsCount) {
             const tr = document.createElement("tr");
+            tr.classList.add("columns")
+            tr.classList.add("is-vcentered")
+            tr.classList.add("is-centered")
+            tr.classList.add("is-mobile")
 
             const plus = document.createElement("b")
             plus.innerHTML = "+"
@@ -429,6 +433,10 @@ const displaySubjectsCount = () => {
         }
         else {
             const calcBtn = document.createElement("tr");
+            calcBtn.classList.add("columns")
+            calcBtn.classList.add("is-vcentered")
+            calcBtn.classList.add("is-centered")
+            calcBtn.classList.add("is-mobile")
 
             gpaCalculateButton.innerHTML = "Calculate GPA"
             calcBtn.appendChild(gpaCalculateButton)
@@ -497,7 +505,7 @@ function calculateGPA() {
     result.classList.add("is-vcentered")
     result.classList.add("is-centered")
     result.classList.add("is-mobile")
-    result.style.marginTop = "10px"
+    result.style.marginTop = "20px"
 
 
     const resultTag = document.createElement("div")
