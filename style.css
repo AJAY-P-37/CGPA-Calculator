@@ -3,37 +3,46 @@
   }
 
 html{
-    min-height:100vh;
+    text-align: center;
+    margin: 0px;
+    min-height: 100vh;
+    background-color:black;
+    display: flex;
+    justify-content: center;
 }
 body{
     text-align: center;
     margin: 0px;
     min-height: 100vh;
     background-color:black;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+header{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 10%;
+  display: block;
+}
+header b, p{
+  color: white;
+
+}
+
+#tabs {
+  display: flex;
+  justify-content: center;
+
 }
 
 #outerbox{
-    margin-top: 100px;
-    max-width: fit-content;
-    
-}
-
-#tabs li:active{
-    color: rgb(0, 0, 0);
-}
-#radio{
-    width: 600px;
+  margin: 5px;
 }
 
 #cgpaTable {
     margin-top: 10px;
   }
 
-@media (min-width: 768px) {
 
-  body{
-    display: flex;
-    justify-content: center;
-  }
-      
-}
+

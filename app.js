@@ -116,11 +116,13 @@ const displaySemesterCount = () => {
         tr.classList.add("is-vcentered")
         tr.classList.add("is-centered")
         tr.classList.add("is-mobile")
+        tr.style.margin = "0px"
 
         const label = document.createElement("b");
         label.innerHTML = `Semester ${sem}`
         label.classList.add("column")
-        label.classList.add("is-4")
+        label.classList.add("is-3")
+        label.style.padding = "0px"
 
         const gpa = document.createElement("input");
         gpa.type = "number";
@@ -165,6 +167,7 @@ const displaySemesterCount = () => {
             tr.classList.add("is-vcentered")
             tr.classList.add("is-centered")
             tr.classList.add("is-mobile")
+            tr.style.margin = "0px"
 
             const plus = document.createElement("b")
             plus.innerHTML = "+"
@@ -178,6 +181,8 @@ const displaySemesterCount = () => {
             calcBtn.classList.add("is-vcentered")
             calcBtn.classList.add("is-centered")
             calcBtn.classList.add("is-mobile")
+            calcBtn.style.margin = "20px"
+
 
             cgpaCalculateButton.innerHTML = "Calculate CGPA"
             calcBtn.appendChild(cgpaCalculateButton)
@@ -347,11 +352,13 @@ const displaySubjectsCount = () => {
         tr.classList.add("is-vcentered")
         tr.classList.add("is-centered")
         tr.classList.add("is-mobile")
+        tr.style.margin = "0px"
 
         const label = document.createElement("b");
         label.innerHTML = `Subject ${count}`;
         label.classList.add("column")
         label.classList.add("is-3")
+        label.style.padding = "0px"
 
         const gradeDiv = document.createElement("div")
         gradeDiv.classList.add("select")
@@ -403,12 +410,13 @@ const displaySubjectsCount = () => {
 
         const credits = document.createElement("input");
         credits.type = "number";
-        credits.placeholder = `Subject ${count} Credits`
+        credits.placeholder = `Sub ${count} Credits`
         credits.min = "0"
         credits.classList.add("input")
         credits.classList.add("is-rounded")
         credits.classList.add("is-small")
         credits.classList.add('is-info')
+
         credits.addEventListener('input', () => validateSubjectCredits(credits, count))
 
         tr.appendChild(label)
@@ -424,6 +432,7 @@ const displaySubjectsCount = () => {
             tr.classList.add("is-vcentered")
             tr.classList.add("is-centered")
             tr.classList.add("is-mobile")
+            tr.style.margin = "0px"
 
             const plus = document.createElement("b")
             plus.innerHTML = "+"
@@ -437,6 +446,7 @@ const displaySubjectsCount = () => {
             calcBtn.classList.add("is-vcentered")
             calcBtn.classList.add("is-centered")
             calcBtn.classList.add("is-mobile")
+            calcBtn.style.margin = "20px"
 
             gpaCalculateButton.innerHTML = "Calculate GPA"
             calcBtn.appendChild(gpaCalculateButton)
