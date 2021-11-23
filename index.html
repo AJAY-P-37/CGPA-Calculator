@@ -34,7 +34,7 @@
 
         <div class='cgpa block'>
             <div class="columns is-mobile is-vcentered is-centered block">
-                <b class="column is-5">Upto which Semester</b>
+                <b class="column is-6">Upto which Semester</b>
                 <div class="select is-small is-info is-rounded">
                     <select name="semestersCompleted">
                         <option value="0" style="display: none">?</option>
@@ -61,8 +61,8 @@
         <div class="gpa block">
             <div class="columns is-mobile is-vcentered is-centered block">
                 <b class="column is-6">Total number of Passed subjects in the semester</b>
-                <input class="column is-4 is-small input is-rounded is-normal is-info" type="number"
-                    placeholder="No. of Subjects Passed" min="0" max="75" step="1">
+                <input class="column is-4 is-small input is-rounded is-normal is-info" type="text"
+                    placeholder="No. of Subjects Passed" oninput="this.value=this.value.replace(/[^\d]/,'')">
             </div>
 
             <div class="columns is-mobile is-vcentered is-centered block" id="padd">

@@ -33,12 +33,15 @@ gpaButton.addEventListener("click", displayGPA)
 
 
 /******CGPA******/
+let previousCGPATyped = ""
 function validateGPA(gpa, sem) {
     console.log(gpa.value, typeof (gpa.value))
+
     gpaEntered = parseFloat(gpa.value)
+    console.log(gpaEntered)
     if (gpaEntered > 10) {
         alert("GPA can't be greater than 10")
-        gpa.value = gpa.value.slice(0, gpa.value.length - 1)
+        gpa.value = previousCGPATyped
 
 
     } else if (gpaEntered < 0) {
@@ -60,9 +63,13 @@ function validateGPA(gpa, sem) {
             return value == true
         })
     }
+
+    previousCGPATyped = gpa.value
 }
 
+let previousCreditTyped = ""
 function validateSemCredits(credits, sem) {
+    credits.value = credits.value.replace(/[^\d]/, '')
 
     creditEntered = parseInt(credits.value)
 
@@ -71,6 +78,9 @@ function validateSemCredits(credits, sem) {
         credits.value = ""
         cgpaCalculateButton.disabled = true
         cgpaCreditsValidator[sem - 1] = false
+    }
+    else if (creditEntered > 200) {
+        credits.value = previousCreditTyped
     }
     else if (credits.value == "") {
         cgpaCalculateButton.disabled = true
@@ -86,6 +96,7 @@ function validateSemCredits(credits, sem) {
         })
 
     }
+    previousCreditTyped = credits.value
 }
 
 let gpaArr = [];
@@ -142,10 +153,8 @@ const displaySemesterCount = () => {
         x.innerHTML = "x"
 
         const credits = document.createElement("input");
-        credits.type = "number";
+        credits.type = "text";
         credits.placeholder = `Sem ${sem} Credits`
-        credits.min = "0"
-        credits.step = "1"
         credits.classList.add("input")
         credits.classList.add("is-rounded")
         credits.classList.add("is-small")
@@ -290,8 +299,10 @@ function validateGrade(grade, count) {
 
 }
 
-
+let previousCreditTyped1 = ""
 function validateSubjectCredits(credits, count) {
+
+    credits.value = credits.value.replace(/[^\d]/, '')
 
     creditEntered = parseInt(credits.value)
 
@@ -300,6 +311,9 @@ function validateSubjectCredits(credits, count) {
         credits.value = ""
         gpaCalculateButton.disabled = true
         gpaCreditsValidator[count - 1] = false
+    }
+    else if (creditEntered > 200) {
+        credits.value = previousCreditTyped1
     }
     else if (credits.value == "") {
         gpaCalculateButton.disabled = true
@@ -315,6 +329,8 @@ function validateSubjectCredits(credits, count) {
         })
 
     }
+
+    previousCreditTyped1 = credits.value
 }
 
 const displaySubjectsCount = () => {
@@ -409,7 +425,7 @@ const displaySubjectsCount = () => {
         x.innerHTML = "x"
 
         const credits = document.createElement("input");
-        credits.type = "number";
+        credits.type = "text";
         credits.placeholder = `Sub ${count} Credits`
         credits.min = "0"
         credits.classList.add("input")
