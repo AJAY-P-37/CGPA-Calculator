@@ -21,7 +21,7 @@
     <div class="box" id="outerbox">
         <div class="columns is-mobile is-vcentered is-centered block">
             <div class="columns is-mobile is-vcentered is-centered block" id="radio">
-                <b class="column is-6">What do you want to Calculate?</b>
+                <b class="column is-8">What do you want to Calculate?</b>
 
                 <div class="column tabs is-small is-toggle is-toggle-rounded">
                     <ul id="tabs">
@@ -62,7 +62,8 @@
             <div class="columns is-mobile is-vcentered is-centered block">
                 <b class="column is-6">Total number of Passed subjects in the semester</b>
                 <input class="column is-4 is-small input is-rounded is-normal is-info" type="text"
-                    placeholder="No. of Subjects Passed" oninput="this.value=this.value.replace(/[^\d]/,'')">
+                    placeholder="No. of Subjects Passed" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+
             </div>
 
             <div class="columns is-mobile is-vcentered is-centered block" id="padd">

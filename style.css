@@ -40,13 +40,19 @@ header b, p{
 
 #outerbox > div.cgpa.block > div:nth-child(1), #outerbox > div.gpa.block > div:nth-child(1){
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 .cgpa div b{
   padding: 0px;
 }
 
-
+#radio{
+  margin: 0px;
+}
+#radio > b{
+  padding-left: 0px;
+  padding-right: 0px;
+}
 #outerbox{
   margin: 5px;
 }

@@ -69,7 +69,9 @@ function validateGPA(gpa, sem) {
 
 let previousCreditTyped = ""
 function validateSemCredits(credits, sem) {
-    credits.value = credits.value.replace(/[^\d]/, '')
+
+    credits.value = credits.value.replace(/[^0-9]/g, '')
+
 
     creditEntered = parseInt(credits.value)
 
@@ -260,7 +262,15 @@ const calculateCGPA = () => {
     resultTag.appendChild(actualResult)
 
     const resultText = cgp / (totalCredits * 1.0)
-    actualResult.innerHTML = `${resultText.toFixed(3)} / 10`
+    console.log(resultText)
+    if (isNaN(resultText)) {
+        alert("Incorrect value found")
+        actualResult.innerHTML = `- / 10`
+
+    } else {
+        actualResult.innerHTML = `${resultText.toFixed(3)} / 10`
+
+    }
 
     cgpaDiv.appendChild(result)
 
@@ -302,7 +312,7 @@ function validateGrade(grade, count) {
 let previousCreditTyped1 = ""
 function validateSubjectCredits(credits, count) {
 
-    credits.value = credits.value.replace(/[^\d]/, '')
+    credits.value = credits.value.replace(/[^0-9]/g, '')
 
     creditEntered = parseInt(credits.value)
 
@@ -543,7 +553,7 @@ function calculateGPA() {
     const resultSpan = document.createElement("span")
     resultSpan.classList.add("tag")
     resultSpan.classList.add("is-dark")
-    resultSpan.innerHTML = "Your CGPA is "
+    resultSpan.innerHTML = "Your GPA is "
     resultSpan.style.width = "100px"
     resultSpan.style.height = "40px"
     resultSpan.style.fontSize = "15px"
@@ -560,7 +570,14 @@ function calculateGPA() {
     resultTag.appendChild(actualResult)
 
     const resultText = gpa / (totalCredits * 1.0)
-    actualResult.innerHTML = `${resultText.toFixed(3)}/10`
+    if (isNaN(resultText)) {
+        alert("Incorrect value found")
+        actualResult.innerHTML = `- / 10`
+
+    } else {
+        actualResult.innerHTML = `${resultText.toFixed(3)} / 10`
+
+    }
     gpaDiv.appendChild(result)
 
 }
