@@ -24,18 +24,30 @@ body{
 header{
   margin-top: 20px;
   margin-bottom: 20px;
-  height: 10%;
+  max-width: 600px;
   display: block;
 }
-header b, p{
+header b, li{
   color: white;
 
+}
+header ul{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  list-style-position: inside;
+}
+header ul li p{
+  text-align: left;
+}
+ul li ul{
+  list-style-type: disc;
 }
 
 #tabs {
   display: flex;
   justify-content: center;
-
 }
 
 #outerbox > div.cgpa.block > div:nth-child(1), #outerbox > div.gpa.block > div:nth-child(1){

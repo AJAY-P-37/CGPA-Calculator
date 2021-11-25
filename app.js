@@ -2,28 +2,43 @@
 window.onload = () => {
     cgpaDiv.style.display = "none"
     gpaDiv.style.display = "none"
+
+    cgpaNote.style.display = "none"
+    gpaNote.style.display = "none"
 }
 
 const displayCGPA = () => {
     cgpaDiv.style.display = "block"
+    cgpaNote.style.display = "block"
+    cgpaNote.parentNode.style.listStyleType = "circle"
+
     cgpaButton.parentNode.classList.add("is-active")
     cgpaButton.style.backgroundColor = "black"
     gpaButton.parentNode.classList.remove("is-active")
     gpaButton.style.backgroundColor = "white"
+
     gpaDiv.style.display = "none"
+    gpaNote.style.display = "none"
 }
 
 const displayGPA = () => {
     cgpaDiv.style.display = "none"
+    cgpaNote.style.display = "none"
+
     gpaButton.parentNode.classList.add("is-active")
     gpaButton.style.backgroundColor = "black"
     cgpaButton.parentNode.classList.remove("is-active")
     cgpaButton.style.backgroundColor = "white"
+
     gpaDiv.style.display = "block";
+    gpaNote.style.display = "block"
 }
 
 const cgpaDiv = document.querySelector(".cgpa")
 const gpaDiv = document.querySelector(".gpa")
+
+const cgpaNote = document.querySelector(".cgpaNote")
+const gpaNote = document.querySelector(".gpaNote")
 
 const cgpaButton = document.querySelector("a")
 const gpaButton = document.querySelectorAll("a")[1]
@@ -56,12 +71,12 @@ function validateGPA(gpa, sem) {
     else {
         gpaValidator[sem - 1] = true;
 
-        console.log(cgpaCreditsValidator, gpaValidator)
+        console.log(cgpaCreditsValidator, gpaValidator, totalCreditsValidator)
         cgpaCalculateButton.disabled = !gpaValidator.every((value) => {
             return value == true
         }) || !cgpaCreditsValidator.every((value) => {
             return value == true
-        })
+        }) || !totalCreditsValidator
     }
 
     previousCGPATyped = gpa.value
@@ -90,15 +105,68 @@ function validateSemCredits(credits, sem) {
     }
     else {
         cgpaCreditsValidator[sem - 1] = true
-        console.log(cgpaCreditsValidator, gpaValidator)
+        console.log(cgpaCreditsValidator, gpaValidator, totalCreditsValidator)
         cgpaCalculateButton.disabled = !cgpaCreditsValidator.every((value) => {
+            return value == true
+        }) || !gpaValidator.every((value) => {
+            return value == true
+        }) || !totalCreditsValidator
+
+    }
+    let creditsInputFields = document.getElementsByClassName("cgpaCredits")
+    console.log(creditsInputFields)
+    totalCreditsValue = 0
+    for (let count = 0; count < creditsInputFields.length; count++) {
+
+        let value = parseInt(creditsInputFields[count].value)
+        if (!isNaN(value)) {
+            totalCreditsValue += value
+        }
+    }
+    totalCreditsInput.value = totalCreditsValue
+
+
+    previousCreditTyped = credits.value
+}
+
+let totalCreditsValue = 0
+
+let previousTotalCreditTyped = 0
+function validateTotalCredits(totalCredits) {
+
+
+    totalCredits.value = totalCredits.value.replace(/[^0-9]/g, '')
+
+    creditEntered = parseInt(totalCredits.value)
+
+    if (creditEntered < 0) {
+        alert("Total Credits can't be lesser than 0")
+        totalCredits.value = ""
+        cgpaCalculateButton.disabled = true
+    }
+    else if (creditEntered > 200) {
+        totalCredits.value = previousTotalCreditTyped
+    }
+    else if (totalCredits.value == "") {
+        cgpaCalculateButton.disabled = true
+        totalCreditsValidator = false
+    } else if (totalCreditsValue < totalCredits.value) {
+        alert("Total Enrolled Credits can't be Greater than the\nSum of all the credits in all the semester\nIt can either be less than or equal to it")
+        totalCredits.value = previousTotalCreditTyped
+    }
+    else {
+        console.log(cgpaCreditsValidator, gpaValidator, totalCreditsValidator)
+        totalCreditsValidator = true
+        cgpaCalculateButton.disabled = !totalCreditsValidator || !cgpaCreditsValidator.every((value) => {
             return value == true
         }) || !gpaValidator.every((value) => {
             return value == true
         })
 
     }
-    previousCreditTyped = credits.value
+
+    previousTotalCreditTyped = totalCredits.value
+
 }
 
 let gpaArr = [];
@@ -109,6 +177,8 @@ const displaySemesterCount = () => {
     gpaValidator.fill(false, 0, semestersCompleted)
     cgpaCreditsValidator.length = semestersCompleted
     cgpaCreditsValidator.fill(false, 0, semestersCompleted)
+
+    totalCreditsValidator = true
 
 
     cgpaCalculateButton.disabled = true
@@ -132,19 +202,21 @@ const displaySemesterCount = () => {
         tr.style.margin = "0px"
 
         const label = document.createElement("b");
-        label.innerHTML = `Semester ${sem}`
+        label.innerHTML = `Semester ${sem}: `
         label.classList.add("column")
-        label.classList.add("is-3")
+        label.classList.add("is-4")
         label.style.padding = "0px"
 
         const gpa = document.createElement("input");
         gpa.type = "number";
-        gpa.placeholder = `Sem ${sem} GPA`
+        gpa.placeholder = `GPA`
         gpa.min = "0"
         gpa.max = "10"
         gpa.step = "0.01"
         gpa.classList.add("input")
         gpa.classList.add("is-rounded")
+        gpa.classList.add("column")
+        gpa.classList.add("is-3")
         gpa.classList.add("is-small")
         gpa.classList.add('is-info')
 
@@ -152,11 +224,14 @@ const displaySemesterCount = () => {
         gpaArr.push(gpa)
 
         const x = document.createElement("b")
-        x.innerHTML = "x"
+        x.innerHTML = "×"
 
         const credits = document.createElement("input");
         credits.type = "text";
-        credits.placeholder = `Sem ${sem} Credits`
+        credits.placeholder = `Enrolled Credits`
+        credits.classList.add("cgpaCredits")
+        credits.classList.add("column")
+        credits.classList.add("is-4")
         credits.classList.add("input")
         credits.classList.add("is-rounded")
         credits.classList.add("is-small")
@@ -187,6 +262,26 @@ const displaySemesterCount = () => {
             table.appendChild(tr)
         }
         else {
+            const line = document.createElement("hr")
+            line.style.border = "2px solid black"
+            line.style.backgroundColor = "black"
+            table.appendChild(line)
+
+            const totalCreditsRow = document.createElement("tr")
+
+            totalCreditsRow.classList.add("columns")
+            totalCreditsRow.classList.add("is-vcentered")
+            totalCreditsRow.classList.add("is-centered")
+            totalCreditsRow.classList.add("is-mobile")
+            totalCreditsRow.style.margin = "0px"
+
+            totalCreditsLabel.innerHTML = `Total Credits Enrolled: `
+            totalCreditsInput.value = 0
+
+            totalCreditsRow.appendChild(totalCreditsLabel)
+            totalCreditsRow.appendChild(totalCreditsInput)
+            table.appendChild(totalCreditsRow)
+
             const calcBtn = document.createElement("tr");
             calcBtn.classList.add("columns")
             calcBtn.classList.add("is-vcentered")
@@ -254,14 +349,15 @@ const calculateCGPA = () => {
 
     const actualResult = document.createElement("span")
     actualResult.classList.add("tag")
-    actualResult.classList.add("is-success")
+    actualResult.classList.add("is-info")
     actualResult.style.width = "100px"
     actualResult.style.height = "40px"
     actualResult.style.fontSize = "15px"
 
     resultTag.appendChild(actualResult)
 
-    const resultText = cgp / (totalCredits * 1.0)
+    let actualTotalCredits = totalCreditsInput.value
+    const resultText = cgp / (actualTotalCredits * 1.0)
     console.log(resultText)
     if (isNaN(resultText)) {
         alert("Incorrect value found")
@@ -282,6 +378,24 @@ cgpaCalculateButton.classList.add("button")
 cgpaCalculateButton.classList.add("is-info")
 cgpaCalculateButton.classList.add("is-outlined")
 cgpaCalculateButton.addEventListener("click", calculateCGPA)
+
+
+let totalCreditsLabel = document.createElement("b")
+totalCreditsLabel.classList.add("column")
+totalCreditsLabel.classList.add("is-6")
+
+let totalCreditsInput = document.createElement("input")
+totalCreditsInput.type = "text";
+totalCreditsInput.placeholder = "Total Credits"
+totalCreditsInput.classList.add("input")
+totalCreditsInput.classList.add("column")
+totalCreditsInput.classList.add("is-rounded")
+totalCreditsInput.classList.add("is-small")
+totalCreditsInput.classList.add('is-info')
+totalCreditsInput.classList.add("is-4")
+totalCreditsInput.addEventListener("input", () => validateTotalCredits(totalCreditsInput))
+
+let totalCreditsValidator = true
 
 
 /*****GPA******/
@@ -337,8 +451,22 @@ function validateSubjectCredits(credits, count) {
         }) || !gradeValidator.every((value) => {
             return value == true
         })
-
     }
+
+    let creditsInputFields = document.getElementsByClassName("gpaCredits")
+    console.log(creditsInputFields)
+    let totalCredits = 0
+    for (let count = 0; count < creditsInputFields.length; count++) {
+
+        let value = parseInt(creditsInputFields[count].value)
+        console.log(value)
+        if (!isNaN(value)) {
+            totalCredits += value
+        }
+    }
+    totalCreditsLabel1.innerHTML = `Total Credits: ${totalCredits}`
+
+
 
     previousCreditTyped1 = credits.value
 }
@@ -367,7 +495,7 @@ const displaySubjectsCount = () => {
     gpaCalculateButton.disabled = true
 
 
-    if (subjectsCount > 70) {
+    if (subjectsCount > 100) {
         alert(`Did you really write ${subjectsCount} subjects in one semester?\nGreat! But sorry this app is NOT efficient enough to do that`)
         noOfSubjects.value = ""
         return
@@ -381,9 +509,9 @@ const displaySubjectsCount = () => {
         tr.style.margin = "0px"
 
         const label = document.createElement("b");
-        label.innerHTML = `Subject ${count}`;
+        label.innerHTML = `Subject ${count}: `;
         label.classList.add("column")
-        label.classList.add("is-3")
+        label.classList.add("is-4")
         label.style.padding = "0px"
 
         const gradeDiv = document.createElement("div")
@@ -397,23 +525,26 @@ const displaySubjectsCount = () => {
         // grade.ariaLabel = "Default select example"
 
         const optionSelect = document.createElement("option")
-        optionSelect.innerHTML = `Subject ${count} Grade`
+        optionSelect.innerHTML = `Grade`
         optionSelect.style.display = "none"
 
         const optionS = document.createElement("option");
-        optionS.innerHTML = `S Grade`;
+        optionS.innerHTML = `S Grade(10)`;
 
         const optionA = document.createElement("option");
-        optionA.innerHTML = `A Grade`;
+        optionA.innerHTML = `A Grade(9)`;
 
         const optionB = document.createElement("option");
-        optionB.innerHTML = `B Grade`;
+        optionB.innerHTML = `B Grade(8)`;
 
         const optionC = document.createElement("option");
-        optionC.innerHTML = `C Grade`;
+        optionC.innerHTML = `C Grade(7)`;
 
         const optionD = document.createElement("option");
-        optionD.innerHTML = `D Grade`;
+        optionD.innerHTML = `D Grade(6)`;
+
+        const optionU = document.createElement("option");
+        optionU.innerHTML = `U Grade(0)`;
 
         grade.appendChild(optionSelect)
         grade.appendChild(optionS)
@@ -421,6 +552,7 @@ const displaySubjectsCount = () => {
         grade.appendChild(optionB)
         grade.appendChild(optionC)
         grade.appendChild(optionD)
+        grade.appendChild(optionU)
 
         grade.addEventListener("change", () => validateGrade(grade, count))
         // grade.type = "text";
@@ -432,12 +564,15 @@ const displaySubjectsCount = () => {
 
 
         const x = document.createElement("b")
-        x.innerHTML = "x"
+        x.innerHTML = "×"
 
         const credits = document.createElement("input");
         credits.type = "text";
-        credits.placeholder = `Sub ${count} Credits`
+        credits.placeholder = `Credits`
         credits.min = "0"
+        credits.classList.add("gpaCredits")
+        credits.classList.add("column")
+        credits.classList.add("is-3")
         credits.classList.add("input")
         credits.classList.add("is-rounded")
         credits.classList.add("is-small")
@@ -467,6 +602,17 @@ const displaySubjectsCount = () => {
             table.appendChild(tr)
         }
         else {
+            const line = document.createElement("hr")
+            line.style.border = "2px solid black"
+            line.style.backgroundColor = "black"
+            table.appendChild(line)
+
+            const totalCreditsRow = document.createElement("tr")
+
+            totalCreditsLabel1.innerHTML = `Total Credits: 0`
+            totalCreditsRow.appendChild(totalCreditsLabel1)
+            table.appendChild(totalCreditsRow)
+
             const calcBtn = document.createElement("tr");
             calcBtn.classList.add("columns")
             calcBtn.classList.add("is-vcentered")
@@ -490,7 +636,7 @@ function calculateGPA() {
 
     let subjectRow = document.querySelectorAll(".gpaList")
 
-    let gpa = 0.0, totalCredits = 0.0
+    let gpa = 0.0, totalCredits = 0.0, resultFlag = false
     for (let subject = 0; subject < subjectRow.length; subject += 1) {
 
         let [label, selectDiv, b, input] = subjectRow[subject].childNodes
@@ -499,24 +645,29 @@ function calculateGPA() {
         let credits = parseFloat(input.value)
 
         switch (grade) {
-            case "S Grade":
+            case "S Grade(10)":
                 grade = 10
                 break;
 
-            case "A Grade":
+            case "A Grade(9)":
                 grade = 9
                 break;
 
-            case "B Grade":
+            case "B Grade(8)":
                 grade = 8
                 break;
 
-            case "C Grade":
+            case "C Grade(7)":
                 grade = 7
                 break;
 
-            case "D Grade":
+            case "D Grade(6)":
                 grade = 6
+                break;
+
+            case "U Grade(0)":
+                grade = 0
+                resultFlag = true
                 break;
 
             default:
@@ -574,9 +725,14 @@ function calculateGPA() {
         alert("Incorrect value found")
         actualResult.innerHTML = `- / 10`
 
-    } else {
+    } else if (resultFlag || resultText < 6) {
+        actualResult.classList.remove("is-success")
+        actualResult.classList.add("is-danger")
         actualResult.innerHTML = `${resultText.toFixed(3)} / 10`
 
+    } else {
+
+        actualResult.innerHTML = `${resultText.toFixed(3)} / 10`
     }
     gpaDiv.appendChild(result)
 
@@ -589,3 +745,5 @@ gpaCalculateButton.classList.add("is-info")
 gpaCalculateButton.classList.add("is-outlined")
 gpaCalculateButton.classList.add("is-mobile")
 gpaCalculateButton.addEventListener("click", () => calculateGPA())
+
+let totalCreditsLabel1 = document.createElement("b")

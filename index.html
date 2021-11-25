@@ -13,9 +13,39 @@
 </head>
 
 <body>
-    <header>
+    <header class="content is-small is-mobile">
         <h1><b>CGPA/GPA Calculator</b></h1>
-        <p>Enter only the GPA/Grades and Credits of the Passed Subjects</p>
+        <ul>
+            <li>
+                <p>All the fields are mandatory to enable the "Calculate" Button</p>
+            </li>
+            <li class="cgpaNote">
+                <p>In CGPA Section,</p>
+                <ul>
+                    <li>
+                        <p>If you have/had any backlogs, you must re-enter the correct number for "Total
+                            Enrolled Credits" field, or else just leave to be updated automatically</p>
+                    </li>
+                    <li>
+                        <p>"Total Credits Enrolled" is the Sum of credits enrolled for only the subjects that are
+                            'current semester papers' in that semester (Count a subject's credits only Once
+                            and ignore even if you had a backlog and enrolled again in another semester)</p>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="gpaNote">
+                <p>In GPA Section,</p>
+                <ul>
+                    <li>
+                        <p>Incase of any backlogs, select "U grade" and enter it's respective credits</p>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+
 
     </header>
     <div class="box" id="outerbox">
@@ -60,7 +90,7 @@
 
         <div class="gpa block">
             <div class="columns is-mobile is-vcentered is-centered block">
-                <b class="column is-6">Total number of Passed subjects in the semester</b>
+                <b class="column is-6">Total number of subjects in the semester</b>
                 <input class="column is-4 is-small input is-rounded is-normal is-info" type="text"
                     placeholder="No. of Subjects Passed" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
 
