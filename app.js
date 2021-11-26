@@ -10,7 +10,9 @@ window.onload = () => {
 const displayCGPA = () => {
     cgpaDiv.style.display = "block"
     cgpaNote.style.display = "block"
-    cgpaNote.parentNode.style.listStyleType = "circle"
+
+
+    // cgpaNote.parentNode.style.listStyleType = "circle"
 
     cgpaButton.parentNode.classList.add("is-active")
     cgpaButton.style.backgroundColor = "black"
@@ -39,6 +41,9 @@ const gpaDiv = document.querySelector(".gpa")
 
 const cgpaNote = document.querySelector(".cgpaNote")
 const gpaNote = document.querySelector(".gpaNote")
+
+const cgpaTable = document.querySelector("#cgpaTable")
+const gpaTable = document.querySelector("#gpaTable")
 
 const cgpaButton = document.querySelector("a")
 const gpaButton = document.querySelectorAll("a")[1]
@@ -184,6 +189,16 @@ const displaySemesterCount = () => {
     cgpaCalculateButton.disabled = true
 
     const table = document.querySelector(".cgpa tbody");
+    // for (let i = 0; i < 8; i++) {
+    //     if (i <= parseInt(semestersCompleted)) {
+
+    //     } else {
+    //         console.log(i, semestersCompleted, table.childNodes)
+    //         if (i <= table.childNodes.length) {
+    //             table.childNodes[i].remove()
+    //         }
+    //     }
+    // }
     table.replaceChildren()
 
     let cgpaDisplay = cgpaDiv.childNodes[cgpaDiv.childNodes.length - 1]
@@ -192,6 +207,8 @@ const displaySemesterCount = () => {
         cgpaDisplay.remove()
     }
 
+
+    cgpaTable.style.border = "2px solid black"
 
     for (let sem = 1; sem <= semestersCompleted; sem += 1) {
         const tr = document.createElement("tr");
@@ -256,6 +273,7 @@ const displaySemesterCount = () => {
             tr.style.margin = "0px"
 
             const plus = document.createElement("b")
+            plus.style.marginLeft = "25%"
             plus.innerHTML = "+"
             tr.appendChild(plus)
 
@@ -281,6 +299,7 @@ const displaySemesterCount = () => {
             totalCreditsRow.appendChild(totalCreditsLabel)
             totalCreditsRow.appendChild(totalCreditsInput)
             table.appendChild(totalCreditsRow)
+            table.appendChild(totalCreditsNote)
 
             const calcBtn = document.createElement("tr");
             calcBtn.classList.add("columns")
@@ -397,6 +416,9 @@ totalCreditsInput.addEventListener("input", () => validateTotalCredits(totalCred
 
 let totalCreditsValidator = true
 
+let totalCreditsNote = document.createElement("b")
+totalCreditsNote.innerHTML = "(Change if you have/had backlogs)"
+
 
 /*****GPA******/
 
@@ -482,7 +504,12 @@ const displaySubjectsCount = () => {
         gpaDisplay.remove()
     }
     if (noOfSubjects.value == "") {
+
+        gpaTable.style.border = "0px"
         return
+    } else {
+
+        gpaTable.style.border = "2px solid black"
     }
 
     let subjectsCount = parseInt(noOfSubjects.value)
@@ -493,6 +520,8 @@ const displaySubjectsCount = () => {
     gpaCreditsValidator.fill(false, 0, subjectsCount)
 
     gpaCalculateButton.disabled = true
+
+
 
 
     if (subjectsCount > 100) {
@@ -596,6 +625,7 @@ const displaySubjectsCount = () => {
             tr.style.margin = "0px"
 
             const plus = document.createElement("b")
+            plus.style.marginLeft = "38%"
             plus.innerHTML = "+"
             tr.appendChild(plus)
 
