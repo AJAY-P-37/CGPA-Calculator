@@ -208,7 +208,7 @@ const displaySemesterCount = () => {
     }
 
 
-    cgpaTable.style.border = "2px solid black"
+    cgpaTable.style.border = "5px solid black"
 
     for (let sem = 1; sem <= semestersCompleted; sem += 1) {
         const tr = document.createElement("tr");
@@ -282,6 +282,8 @@ const displaySemesterCount = () => {
         else {
             const line = document.createElement("hr")
             line.style.border = "2px solid black"
+            line.style.marginLeft = "5px"
+            line.style.marginRight = "5px"
             line.style.backgroundColor = "black"
             table.appendChild(line)
 
@@ -497,6 +499,7 @@ const displaySubjectsCount = () => {
 
     const table = document.querySelectorAll("tbody")[1];
     table.replaceChildren()
+    table.parentNode.style.marginRight = "5px"
 
     let gpaDisplay = gpaDiv.childNodes[gpaDiv.childNodes.length - 1]
     console.log(gpaDisplay.nodeName)
@@ -509,7 +512,7 @@ const displaySubjectsCount = () => {
         return
     } else {
 
-        gpaTable.style.border = "2px solid black"
+        gpaTable.style.border = "5px solid black"
     }
 
     let subjectsCount = parseInt(noOfSubjects.value)
@@ -634,6 +637,8 @@ const displaySubjectsCount = () => {
         else {
             const line = document.createElement("hr")
             line.style.border = "2px solid black"
+            line.style.marginLeft = "5px"
+            line.style.marginRight = "5px"
             line.style.backgroundColor = "black"
             table.appendChild(line)
 
