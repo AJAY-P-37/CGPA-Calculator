@@ -35,6 +35,10 @@ header ul li p{
   text-align: left;
 }
 
+main {
+  border: solid 3px;
+}
+
 hr{
   border: 2px solid black;
   background-color:black;
