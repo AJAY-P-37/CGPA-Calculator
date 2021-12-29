@@ -30,13 +30,7 @@ header b, li{
   color: white;
 
 }
-header ul{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  list-style-position: inside;
-}
+
 header ul li p{
   text-align: left;
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explanation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="content is-small is-mobile">
+        <h1><b>CGPA/GPA Calculator</b></h1>
+        <ul>
+            <li class="cgpaNote">
+                <p>In CGPA Section,</p>
+                <main>
+                    <video width="600" controls>
+                        <source src="explanation video.mp4" type="video/mp4">
+                        Your browser does not support HTML video.
+                    </video>
+                </main>
+                <ul>
+
+                    <li>
+                        <p>If you have/had any backlogs, you must re-enter the correct number for "Total
+                            Credits Enrolled" field, or else just leave it to be updated automatically</p>
+                    </li>
+                    <li>
+                        <p>"Total Credits Enrolled" is the Sum of all subject's credits enrolled only Once
+                            and ignore even if you have/had a backlog and enrolled again in another semester</p>
+                    </li>
+                    <li>
+                        <p>Example: (upto semester 2)</p>
+                        <ul>
+                            <li>
+                                <p>semester 1: 7.00 GPA x 20 Enrolled credits (1 arrear in 3 credits subject)</p>
+                            </li>
+                            <li>
+                                <p>semester 2: 8.00 GPA x 23 Enrolled credits (including previous 1 arrear, so only
+                                    20 credits in this semester)</p>
+                            </li>
+                            <li>
+                                <p>Total Credits Enrolled: 40 [20(credits in sem1 subjects) + 20(credits in sem2
+                                    subjects)].<br>'43' will be updated automatically, but "change it to 40".</p>
+                            </li>
+                            <li>
+                                <p>((7.00 x 20) + (8.00 x 23)) / (20 + 20) = 8.10 is the CGPA in semester 2</p>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <div>
+        <a href="index.html" target="_self" class="button is-info" rel="noopener noreferrer">Go Back to Calculate</a>
+    </div>
+
+</body>
+
+</html>

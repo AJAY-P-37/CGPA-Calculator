@@ -45,8 +45,8 @@ const gpaNote = document.querySelector(".gpaNote")
 const cgpaTable = document.querySelector("#cgpaTable")
 const gpaTable = document.querySelector("#gpaTable")
 
-const cgpaButton = document.querySelector("a")
-const gpaButton = document.querySelectorAll("a")[1]
+const cgpaButton = document.querySelector("#cgpaButton")
+const gpaButton = document.querySelector("#gpaButton")
 
 cgpaButton.addEventListener("click", displayCGPA)
 gpaButton.addEventListener("click", displayGPA)
@@ -110,6 +110,7 @@ function validateSemCredits(credits, sem) {
     }
     else {
         cgpaCreditsValidator[sem - 1] = true
+        totalCreditsValidator = true
         console.log(cgpaCreditsValidator, gpaValidator, totalCreditsValidator)
         cgpaCalculateButton.disabled = !cgpaCreditsValidator.every((value) => {
             return value == true
@@ -156,7 +157,8 @@ function validateTotalCredits(totalCredits) {
         cgpaCalculateButton.disabled = true
         totalCreditsValidator = false
     } else if (totalCreditsValue < totalCredits.value) {
-        alert("Total Enrolled Credits can't be Greater than the\nSum of all the credits in all the semester\nIt can either be less than or equal to it")
+        alert("Total Enrolled Credits can't be Greater than the\nSum of all the credits in all the semester\n" +
+            "It can either be less than or equal to it\nor\nEnter each Semester's Enrolled Credits First")
         totalCredits.value = previousTotalCreditTyped
     }
     else {
@@ -377,9 +379,13 @@ const calculateCGPA = () => {
 
     resultTag.appendChild(actualResult)
 
-    let actualTotalCredits = totalCreditsInput.value
+    let actualTotalCredits = parseInt(totalCreditsInput.value)
     const resultText = cgp / (actualTotalCredits * 1.0)
     console.log(resultText)
+    if (resultText > 10 || resultText < 0) {
+        alert("Total Credits Entered is Wrong")
+        actualResult.innerHTML = `- / 10`
+    }
     if (isNaN(resultText)) {
         alert("Incorrect value found")
         actualResult.innerHTML = `- / 10`
@@ -528,7 +534,7 @@ const displaySubjectsCount = () => {
 
 
     if (subjectsCount > 100) {
-        alert(`Did you really write ${subjectsCount} subjects in one semester?\nGreat! But sorry this app is NOT efficient enough to do that`)
+        alert(`Did you really write ${subjectsCount} subjects in one semester?\nGreat! But sorry this app can't do that`)
         noOfSubjects.value = ""
         return
     }
